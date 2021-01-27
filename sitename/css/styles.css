@@ -9,7 +9,7 @@ body {
 }
 
 
-/* Typeography General*/
+/* Typography General*/
 h1 {
   font-family: 'Fira Sans', sans-serif;
   font-size: 3em;
@@ -38,6 +38,8 @@ p {
 /* ---- Layout Rules ---- */
 main {
   margin: 10vh 1em 10vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-hero {
