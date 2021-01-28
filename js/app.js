@@ -13,29 +13,14 @@
  *
 */
 
-/**
- * Define Global Variables
- *
-*/
-
-/**
- * End Global Variables
- * Start Helper Functions
- *
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
-*/
 
 // better scroll event handling
 // https://www.javascripttutorial.net/javascript-dom/javascript-scroll-events/
 
-// some helper stuff
+/**
+ * Define Global Variables
+ *
+*/
 const titleSelect = 'h2.landing__title';
 const sectionSelect = 'section';
 const navSelect = 'navbar__list';
@@ -45,14 +30,6 @@ const navLinkSelect = 'menu__link';
 const navPrefix = 'nav-'
 const showScroll = 'showScrollbar'
 
-// intersection API
-let options = {
-  threshold: 0.8, // 0.7?
-}
-
-let observer = new IntersectionObserver(observerHandler, options);
-
-
 // get all sections
 const sections = document.querySelectorAll(sectionSelect);
 
@@ -61,6 +38,82 @@ const titles = document.querySelectorAll(titleSelect);
 
 // get nav element
 let navEl = document.getElementById(navSelect);
+
+/**
+ * End Global Variables
+ * Start Helper Functions
+ *
+*/
+
+// intersection API
+let options = {
+  threshold: 0.8, // 0.7?
+}
+
+let observer = new IntersectionObserver(observerHandler, options);
+
+/**
+ * End Helper Functions
+ * Begin Main Functions
+ *
+*/
+
+function clearScroll() {
+  // add opacity to navbar
+  document.querySelector(navBarSelect).classList.add('opacityDown');
+}
+
+function onScroll() {
+  // remove opacity override from navbar
+  document.querySelector(navBarSelect).classList.remove('opacityDown');
+  // call clearScroll with timeout
+  setTimeout(clearScroll, 10000);
+}
+
+function clearActiveNav() {
+  // clears active class from all navigation elements
+  const navEls = document.getElementsByClassName(navLinkSelect);
+  for (let i = 0; i < navEls.length; i++) {
+    navEls[i].classList.remove(activeCSS);
+  }
+}
+
+function observerHandler(entries) {
+  // add active CSS to intersecting object
+
+
+  // clear active class
+  clearActiveNav();
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+      // add active CSS to section
+      entry.target.classList.add(activeCSS);
+
+      // add active CSS to corresponding nav title
+      let navItem = document.getElementById(`${navPrefix}${entry.target.id}`);
+      navItem.classList.add(activeCSS);
+
+    } else {
+      entry.target.classList.remove(activeCSS);
+    }
+
+  });
+}
+
+/**
+ * End Main Functions
+ * Begin Events
+ *
+*/
+
+// add listener to scroller events
+document.addEventListener('scroll', onScroll)
+
+/* ========================================================== */
+/* ================== BUILD NAVIGATION BAR ================== */
+/* ========================================================== */
 
 // for every title we append an in nav
 for (let i = 0; i < titles.length; i++) {
@@ -86,58 +139,3 @@ for (let i = 0; i < titles.length; i++) {
   // add to intersection API observer
   observer.observe(sections[i]);
 }
-
-function clearScroll() {
-  document.querySelector(navBarSelect).classList.add('opacityDown');
-}
-
-function scrolla() {
-  document.querySelector(navBarSelect).classList.remove('opacityDown');
-  setTimeout(clearScroll, 10000);
-}
-
-document.addEventListener('scroll', scrolla)
-
-function clearActiveNav() {
-  const navEls = document.getElementsByClassName(navLinkSelect);
-  for (let i = 0; i < navEls.length; i++) {
-    navEls[i].classList.remove(activeCSS);
-  }
-}
-
-// add active CSS to intersecting object
-function observerHandler(entries) {
-  clearActiveNav();
-
-  entries.forEach(entry => {
-
-    if (entry.isIntersecting) {
-      // add active CSS to section
-      entry.target.classList.add(activeCSS);
-
-      // add active CSS to corresponding nav title
-      let navItem = document.getElementById(`${navPrefix}${entry.target.id}`);
-      navItem.classList.add(activeCSS);
-
-    } else {
-      entry.target.classList.remove(activeCSS);
-    }
-
-  });
-}
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- *
-*/
-
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
