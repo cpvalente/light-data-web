@@ -40,7 +40,10 @@ const titleSelect   = 'h2.landing__title';
 const sectionSelect = 'section';
 const navSelect     = 'navbar__list';
 const activeCSS     = 'your-active-class';
+const navSelect = 'navbar__list';
+const activeCSS = 'is__active';
 const navLinkSelect = 'menu__link';
+const navPrefix = 'nav-'
 
 // intersection API
 let options = {
@@ -72,7 +75,7 @@ for (let i = 0; i < titles.length; i++) {
   menuLink.innerText = titles[i].innerText;
   menuLink.href = `#${sections[i].id}`;
   menuLink.classList.add(navLinkSelect);
-  menuLink.setAttribute('id', `nav-${sections[i].id}`);
+  menuLink.setAttribute('id', `${navPrefix}${sections[i].id}`);
 
   // append link to list item
   item.appendChild(menuLink);
@@ -91,9 +94,9 @@ function handleScroll(e){
 }
 
 function clearActiveNav(){
-  const navEls = document.getElementsByClassName('menu__link');
+  const navEls = document.getElementsByClassName(navLinkSelect);
   for (let i = 0; i < navEls.length; i++) {
-    navEls[i].classList.remove('active');
+    navEls[i].classList.remove(activeCSS);
   }
 }
 
@@ -106,12 +109,15 @@ function observerHandler(entries) {
   clearActiveNav();
 
   entries.forEach(entry => {
+
     if (entry.isIntersecting) {
+      // add active CSS to section
       entry.target.classList.add(activeCSS);
-      const navToSelect = `nav-${entry.target.id}`;
-      let navItem = document.getElementById(navToSelect);
-      console.log(navItem);
-      navItem.classList.add('active');
+
+      // add active CSS to corresponding nav title
+      let navItem = document.getElementById(`${navPrefix}${entry.target.id}`);
+      navItem.classList.add(activeCSS);
+
     } else {
       entry.target.classList.remove(activeCSS);
     }
