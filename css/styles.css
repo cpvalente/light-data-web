@@ -312,3 +312,7 @@ body.showScrollbar {
   -ms-overflow-style: unset !important;  /* IE and Edge */
   scrollbar-width: .5em !important;  /* Firefox */
 }
+.opacityDown {
+  opacity: .3;
+  transition: ease 3s;
+}

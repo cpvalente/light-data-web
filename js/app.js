@@ -39,6 +39,7 @@
 const titleSelect = 'h2.landing__title';
 const sectionSelect = 'section';
 const navSelect = 'navbar__list';
+const navBarSelect = '.navbar__menu';
 const activeCSS = 'is__active';
 const navLinkSelect = 'menu__link';
 const navPrefix = 'nav-'
@@ -86,21 +87,16 @@ for (let i = 0; i < titles.length; i++) {
   observer.observe(sections[i]);
 }
 
-let scrolling = false;
+function clearScroll() {
+  document.querySelector(navBarSelect).classList.add('opacityDown');
+}
 
-window.onscroll = () => {
-  scrolling = true;
-};
+function scrolla() {
+  document.querySelector(navBarSelect).classList.remove('opacityDown');
+  setTimeout(clearScroll, 10000);
+}
 
-setInterval(() => {
-  const b = document.querySelector('body');
-  if (scrolling) {
-    b.classList.add(showScroll);
-  } else {
-    b.classList.remove(showScroll);
-  }
-  // scrolling = false;
-}, 400);
+document.addEventListener('scroll', scrolla)
 
 function clearActiveNav() {
   const navEls = document.getElementsByClassName(navLinkSelect);
