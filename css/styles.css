@@ -15,8 +15,6 @@ body {
   font-weight: 400;
   color: #aac7d3;
   font-size: 16px;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
   transition: background-image 1s linear;
 
   background-image: -webkit-linear-gradient(
@@ -303,15 +301,6 @@ section.is__active {
   color: #fafafa;
 }
 
-body.showScrollbar::-webkit-scrollbar {
-  overflow: auto !important;
-}
-
-body.showScrollbar {
-  overflow: auto !important;
-  -ms-overflow-style: unset !important;  /* IE and Edge */
-  scrollbar-width: .5em !important;  /* Firefox */
-}
 .opacityDown {
   opacity: .3;
   transition: ease 3s;
