@@ -1,86 +1,176 @@
-<!doctype html>
-<html lang='en'>
-<head>
-  <meta charset='UTF-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-  <title>light-data</title>
-  <!-- Load Google Fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap' rel='stylesheet'>  <!-- Load Styles -->
-  <link href='./css/styles.css' rel='stylesheet'>
-</head>
-<body>
-
-  <!-- HTML Follows BEM naming conventions
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>light-data</title>
+    <!-- Load Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Load Styles -->
+    <script
+      src="https://kit.fontawesome.com/d3b7847431.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="./css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- HTML Follows BEM naming conventions
   IDs are only used for sections to connect menu achors to sections -->
-  <header class='page__header'>
-    <nav class='navbar__menu'>
-      <!-- Navigation starts as empty UL that will be populated with JS -->
-      <ul id='navbar__list'></ul>
-    </nav>
-  </header>
-  <main class='container'>
-
-    <header class='main__hero'>
-      <h1>light-data</h1>
+    <header class="page__header">
+      <nav class="navbar__menu">
+        <!-- Navigation starts as empty UL that will be populated with JS -->
+        <ul id="navbar__list"></ul>
+      </nav>
     </header>
-    <!-- Each Section has an ID (used for the anchor) and
+    <main class="container">
+      <header class="main__hero">
+        <h1>light-data</h1>
+      </header>
+      <!-- Each Section has an ID (used for the anchor) and
     a data attribute that will populate the li node.
     Adding more sections will automatically populate nav.
     The first section is set to active class by default -->
-    <section id='section1' data-nav='Section 1'>
+      <section id="section1" data-nav="Section 1">
+        <div class="landing__container">
+          <h2 class="landing__title">Minimal yet rich</h2>
+          <p>
+            Light data is a web application for management of production kit
+            lists.
+          </p>
+          <p>
+            We aim on creating a tool for management and sharing of
+            documentation in production worflows.
+          </p>
+            <ul>
+              <li>Keep track of equipment <em class='highlight'>maintenance</em></li>
+              <li>
+                <em class='highlight'>Assign</em> equipment to venue and <em class='highlight'>share</em> kit lists
+                withs incoming guests
+              </li>
+              <li>
+                With powerful excel like features, use production kit lists to
+                <em class='highlight'>create production documentation</em>
+              </li>
+              <li>
+                Allow <em class='highlight'>external users</em> to follow lists and make maintenance requests
+              </li>
+            </ul>
+        </div>
+      </section>
 
-      <div class='landing__container'>
-        <h2 class='landing__title'>Made for entertainment</h2>
-        <p>Initially built with lighting and video systems in mind, light-data is meant to be used by </p>
-        <p>Theaters looking to manage and allocate equipment across venues.</p>
-        <p>Freelancers managing inventory and maintenance logging for service contracts.</p>
-        <p>Installation managers allowing logging and request of maintenance from technicians.</p>
-      </div>
-      </div>
-    </section>
+      <section id="section2" data-nav="Section 2">
+        <div class="landing__container">
+          <h2 class="landing__title">Made for entertainment</h2>
+          <ul>
+            <li>
+              <em>Theaters</em> looking to manage and allocate equipment
+              across venues.
+            </li>
+            <li>
+              <em>Freelancers</em> managing inventory and maintenance
+              logging for service contracts.
+            </li>
+            <li>
+              <em>Installation</em> managers allowing logging and
+              request of maintenance from technicians.
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <section id='section2' data-nav='Section 2'>
-      <div class='landing__container'>
-        <h2 class='landing__title'>Minimal yet rich</h2>
-        <p>Light data is a web application for management of production kit lists.</p>
-        <p>The aim is for a minimal and simple way to generate and share documentation.</p>
-      </div>
-      </div>
-    </section>
+      <section id="section3" data-nav="Section 3">
+        <div class="landing__container">
+          <h2 class="landing__title">Collaborative</h2>
+          <p>
+            Light data is built on realtime databases, making it excellent for
+            multiple users and collaborative setups.
+          </p>
+        </div>
+      </section>
 
-    <section id='section3' data-nav='Section 3'>
-      <div class='landing__container'>
-        <h2 class='landing__title'>Collaborative</h2>
-        <p>Light data is built on realtime databases, making it excellent for multiple users and collaborative setups.</p>
-      </div>
-    </section>
+      <section id="section4" data-nav="Section 4">
+        <div class="landing__container">
+          <h2 class="landing__title">Pricing</h2>
+          <p>
+            light-data is invitation only (for now)<br />
+            If you work within entertainment or installation, drop us a line and
+            we will set you up.
+          </p>
 
-    <section id='section4' data-nav='Section 4'>
-      <div class='landing__container'>
-        <h2 class='landing__title'>Plays with others</h2>
-        <p>Integration with vectorworks.</p>
-      </div>
-    </section>
+          <div class="pricing__container">
+            <div class="pricing__card">
+              <header>Host Yourself</header>
+              <div class="pricing__price">
+                <span class="pricing__price__value">Free</span><br />/ forever
+              </div>
+              <div class="pricing__details">
+                <ul class="pricing__details__check">
+                  <li><em>Unlimited everything</em></li>
+                </ul>
+              </div>
+              <footer>
+                <a href='mailto:mail@carlosvalente.com?subject?Lets talk about light-data'>Contact us</a>
+              </footer>
+            </div>
 
-    <section id='section5' data-nav='Section 5'>
-      <div class='landing__container'>
-        <p>Host youself for free</p>
-        <h2 class='landing__title'>Pricing</h2>
-      </div>
-    </section>
+            <div class="pricing__card">
+              <header>Freelancer</header>
+              <div class="pricing__price">
+                <span class="pricing__price__value">1NOK</span><br />/ monthly
+              </div>
+              <div class="pricing__details">
+                <ul class="pricing__details__check">
+                  <li><em>1</em> user</li>
+                  <li><em>10</em> venues</li>
+                  <li><em>20</em> projects</li>
+                  <li><em>400</em> items</li>
+                </ul>
+              </div>
+              <footer>
+                <a href='mailto:mail@carlosvalente.com?subject?Lets talk about light-data'>Contact us</a>
+              </footer>
+            </div>
 
-    <section id='section6' data-nav='Section 6'>
-      <div class='landing__container'>
-        <h2 class='landing__title'>About Us</h2>
-        <p>light-dev is a collective of developers with background in entertainment and visual arts. We aim to produce the tools we would like to use.</p>
-      </div>
-    </section>
+            <div class="pricing__card">
+              <header>Organisation</header>
+              <div class="pricing__price">
+                <span class="pricing__price__value">100NOK</span><br />/ monthly
+              </div>
+              <div class="pricing__details">
+                <ul class="pricing__details__check">
+                  <li><em>Unlimited</em> users</li>
+                  <li><em>Unlimited</em> venues</li>
+                  <li><em>Unlimited</em> projects</li>
+                  <li><em>Unlimited</em> items</li>
+                </ul>
+              </div>
+              <footer>
+                <a href='mailto:mail@carlosvalente.com?subject?Lets talk about light-data'>Contact us</a>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  </main>
-  <footer class='page__footer'>
-    <p>light-dev</p>
-  </footer>
-</body>
-<script type='text/javascript' src='./js/app.js'></script>
+      <section id="section5" data-nav="Section 5">
+        <div class="landing__container">
+          <h2 class="landing__title">About Us</h2>
+          <p>
+            light-dev is a Norwegian collective of developers with background in
+            entertainment and visual arts. <br/> We aim to produce the tools we would
+            like to use.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="page__footer">
+      <p>light-dev</p>
+      <p>Trondheim - Norway</p>
+    </footer>
+  </body>
+  <script type="text/javascript" src="./js/app.js"></script>
 </html>
