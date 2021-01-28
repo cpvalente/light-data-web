@@ -44,10 +44,11 @@ const navSelect = 'navbar__list';
 const activeCSS = 'is__active';
 const navLinkSelect = 'menu__link';
 const navPrefix = 'nav-'
+const showScroll = 'showScrollbar'
 
 // intersection API
 let options = {
-  threshold: 0.6,
+  threshold: 0.8, // 0.7?
 }
 
 let observer = new IntersectionObserver(observerHandler, options);
@@ -87,22 +88,29 @@ for (let i = 0; i < titles.length; i++) {
   observer.observe(sections[i]);
 }
 
-function handleScroll(e){
-  // here we will toggle scrollbar depending on wether the user
-  // is scrolling
+let scrolling = false;
 
-}
+window.onscroll = () => {
+  scrolling = true;
+};
 
-function clearActiveNav(){
+setInterval(() => {
+  const b = document.querySelector('body');
+  if (scrolling) {
+    b.classList.add(showScroll);
+  } else {
+    b.classList.remove(showScroll);
+  }
+  // scrolling = false;
+}, 400);
+
+function clearActiveNav() {
   const navEls = document.getElementsByClassName(navLinkSelect);
   for (let i = 0; i < navEls.length; i++) {
     navEls[i].classList.remove(activeCSS);
   }
 }
 
-// add event listener for scroll
-// TODO: replace this by onTimeout function
-document.addEventListener('scroll', handleScroll);
 
 // add active CSS to intersecting object
 function observerHandler(entries) {
@@ -122,9 +130,7 @@ function observerHandler(entries) {
       entry.target.classList.remove(activeCSS);
     }
 
-
   });
-  // add active CSS to corresponding nav title
 }
 
 
