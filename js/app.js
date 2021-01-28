@@ -36,10 +36,8 @@
 // https://www.javascripttutorial.net/javascript-dom/javascript-scroll-events/
 
 // some helper stuff
-const titleSelect   = 'h2.landing__title';
+const titleSelect = 'h2.landing__title';
 const sectionSelect = 'section';
-const navSelect     = 'navbar__list';
-const activeCSS     = 'your-active-class';
 const navSelect = 'navbar__list';
 const activeCSS = 'is__active';
 const navLinkSelect = 'menu__link';
@@ -110,7 +108,6 @@ function clearActiveNav() {
     navEls[i].classList.remove(activeCSS);
   }
 }
-
 
 // add active CSS to intersecting object
 function observerHandler(entries) {
