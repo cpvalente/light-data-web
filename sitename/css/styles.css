@@ -1,50 +1,111 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600&display=swap);
 
 /* ---- Base Rules ---- */
-html{
+html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: #0F2027;
+  background-image: #0f2027;
   width: 100%;
+  height: 100%;
   margin: 0;
-  font-family: 'OpenSans', sans-serif;
-  font-weight: 200;
-  color: #fffffc;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: #aac7d3;
   font-size: 16px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  transition: background-image 1s linear;
+
+  background-image: -webkit-linear-gradient(
+    to left,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(
+    to left,
+    #2c5364,
+    #203a43,
+    #0f2027
+  );
+
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 
 /* Typography General*/
 h1 {
-  font-family: 'OpenSans', sans-serif;
-  font-weight: 800;
+  font-family: "OpenSans", sans-serif;
+  font-weight: 600;
   font-size: 3em;
   margin: 2em 1rem;
+  color: #fffffc;
+  text-shadow: 0px 0px 100px rgba(255,255,255,0.6);
 }
 
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
+  body {
+    font-size: 20px;
+  }
   h1 {
-      font-size: 7em;
-      margin: 2em 4rem 1em;
+    font-size: 7em;
+    margin: 2em 4rem 1em;
   }
 }
 
 h2 {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  font-family: 'OpenSans', Sans-Serif;
-  font-size: 3em;
-  color: #fffffa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  font-family: "OpenSans", Sans-Serif;
+  font-weight: 100;
+  font-size: 4em;
 }
 
 p {
+  font-size: 1.5em;
   line-height: 1.6em;
-  color: #fafafa;
+}
+
+.landing__container > ul > li{
+  font-size: 1.5em;
+  line-height: 2em;
+}
+
+.landing__container > ul > li::before {
+  font-family: "FontAwesome";
+  content: "\f105";
+  color: #33c4b6;
+  margin: 0 0.5em 0 0;
+}
+
+
+em {
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: .05em;
+}
+
+.highlight {
+  color: #e9f2f6;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* ---- Layout Rules ---- */
+
+header {
+  height: 40vh;
+}
+
 main {
-  margin: 10vh 0 10vh;
+  margin-top: 10vh;
+  margin-bottom: 5em;
 }
 
 .main-hero {
@@ -62,7 +123,8 @@ section {
 
 /* Navigation Styles*/
 .navbar__menu {
-  background: rgba(15,32,39, 0.7);
+  background: rgba(15, 32, 39, 0.7);
+  font-size: 0.7em;
 }
 
 .navbar__menu ul {
@@ -82,15 +144,11 @@ section {
   padding: 1em;
   text-decoration: none;
   transition: ease 0.3s all;
-  color: #fafafa;
+  color: #aac7d3;
+  transition: all linear 0.4s;
 }
 
 .menu__link:hover {
-  color: #fff;
-}
-
-.menu__link.active {
-  text-decoration: underline;
   color: #fff;
 }
 
@@ -104,13 +162,23 @@ section {
 
 /* Footer Styles */
 .page__footer {
-  background: #222;
-  padding: 1.5em;
+  height: 5em;
+  /* margin-left: 1em; */
+  font-size: 0.5em;
   color: #fffffa;
+  background-color: #0f2027;
+  display: flex;
+  justify-content:space-around;
+
+}
+
+.page__footer > p {
+  padding-left: 1em;
 }
 
 /* Card Styles */
 .pricing__container {
+  padding-top: 3em;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -122,48 +190,47 @@ section {
 .pricing__card {
   text-align: center;
   border: none;
-  border-radius: .7em;
-  width: 15em;
+  border-radius: 0.7em;
+  width: 13em;
   background-color: rgba(255, 255, 255, 1);
   color: #222;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0px 3px 8px;
   margin-top: -0;
-  transition: .4s linear;
+  transition: 0.4s linear;
 }
 
 .pricing__card:hover {
   border: #33c4b6 3px solid;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 12px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0px 5px 12px;
   margin-top: -30px;
-  transition: .3s linear;
+  transition: 0.3s linear;
 }
 
 .pricing__card > header {
-  color: #565656;
-  font-weight: 100;
-  font-size: 2em;
+  color: #979797;
+  font-size: 1.2em;
   height: 1.7em;
   padding-top: 1em;
 }
 
 .pricing__price {
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   height: 3em;
 }
 
 .pricing__price__value {
   color: #222;
-  font-size: 3em;
+  font-size: 2em;
 }
 
 .pricing__details {
   color: #444;
   height: 10em;
   text-align: left;
-  padding-top: 1em;
-  padding-left: .5em;
-  font-size: 1em;
+  padding-top: 2.5em;
+  padding-left: 1.5em;
+  font-size: .8em;
 }
 
 .pricing__card > footer {
@@ -174,8 +241,9 @@ section {
   border: #33c4b6 1px solid;
   border-radius: 40px;
   color: #222;
-  padding: .5em 2em;
-  transition: .3s linear;
+  padding: 0.5em 2em;
+  transition: 0.3s linear;
+  font-size: 0.7em;
 }
 
 .pricing__card > footer > a:hover {
@@ -183,20 +251,20 @@ section {
   background-color: #33c4b6;
   border-radius: 40px;
   color: #f9f9f9;
-  padding: .5em 2em;
-  transition: .1s linear;
+  padding: 0.5em 2em;
+  transition: 0.1s linear;
 }
 
 ul {
-  list-style:none;
+  list-style: none;
   padding-inline-start: 1em;
 }
 
 .pricing__details__check > li::before {
-  font-family: 'FontAwesome';
-  content: '\f00c';
+  font-family: "FontAwesome";
+  content: "\f00c";
   color: #33c4b6;
-  margin: 0 .5em 0 0;
+  margin: 0 0.5em 0 0;
 }
 
 /* ---- Theme Rules ---- */
@@ -206,13 +274,13 @@ ul {
   text-align: left;
 }
 
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
   .landing__container {
-      /* max-width: 50em; */
-      padding: 4em;
+    /* max-width: 50em; */
+    padding: 4em;
   }
   .landing__container > h2 {
-      /* max-width: 20em; */
+    /* max-width: 20em; */
   }
 }
 
@@ -226,21 +294,21 @@ section:nth-of-type(even) .landing__container {
 /* Section Active Styles */
 
 section.is__active {
-  background: -webkit-linear-gradient(
-    to right,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fafafa;
+  transition: all 0.3s linear;
 }
 
 .menu__link.is__active {
   border-bottom: #33c4b6 5px solid;
   color: #fafafa;
+}
+
+body.showScrollbar::-webkit-scrollbar {
+  overflow: auto !important;
+}
+
+body.showScrollbar {
+  overflow: auto !important;
+  -ms-overflow-style: unset !important;  /* IE and Edge */
+  scrollbar-width: .5em !important;  /* Firefox */
 }
