@@ -18,7 +18,6 @@
  *
 */
 
-
 /**
  * End Global Variables
  * Start Helper Functions
@@ -33,10 +32,94 @@
  *
 */
 
-// build the nav
+// better scroll event handling
+// https://www.javascripttutorial.net/javascript-dom/javascript-scroll-events/
+
+// some helper stuff
+const titleSelect   = 'h2.landing__title';
+const sectionSelect = 'section';
+const navSelect     = 'navbar__list';
+const activeCSS     = 'your-active-class';
+const navLinkSelect = 'menu__link';
+
+// intersection API
+let options = {
+  threshold: 0.6,
+}
+
+let observer = new IntersectionObserver(observerHandler, options);
 
 
-// Add class 'active' to section when near top of viewport
+// get all sections
+const sections = document.querySelectorAll(sectionSelect);
+
+// get all titles under #landing__container
+const titles = document.querySelectorAll(titleSelect);
+
+// get nav element
+let navEl = document.getElementById(navSelect);
+
+// for every title we append an in nav
+for (let i = 0; i < titles.length; i++) {
+
+  // create a list element
+  let item = document.createElement('li');
+
+  // create a menu link
+  let menuLink = document.createElement('a');
+
+  // inject title as text and sectionID as ref
+  menuLink.innerText = titles[i].innerText;
+  menuLink.href = `#${sections[i].id}`;
+  menuLink.classList.add(navLinkSelect);
+  menuLink.setAttribute('id', `nav-${sections[i].id}`);
+
+  // append link to list item
+  item.appendChild(menuLink);
+
+  // append to navbar
+  navEl.appendChild(item);
+
+  // add to intersection API observer
+  observer.observe(sections[i]);
+}
+
+function handleScroll(e){
+  // here we will toggle scrollbar depending on wether the user
+  // is scrolling
+
+}
+
+function clearActiveNav(){
+  const navEls = document.getElementsByClassName('menu__link');
+  for (let i = 0; i < navEls.length; i++) {
+    navEls[i].classList.remove('active');
+  }
+}
+
+// add event listener for scroll
+// TODO: replace this by onTimeout function
+document.addEventListener('scroll', handleScroll);
+
+// add active CSS to intersecting object
+function observerHandler(entries) {
+  clearActiveNav();
+
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add(activeCSS);
+      const navToSelect = `nav-${entry.target.id}`;
+      let navItem = document.getElementById(navToSelect);
+      console.log(navItem);
+      navItem.classList.add('active');
+    } else {
+      entry.target.classList.remove(activeCSS);
+    }
+
+
+  });
+  // add active CSS to corresponding nav title
+}
 
 
 // Scroll to anchor ID using scrollTO event
