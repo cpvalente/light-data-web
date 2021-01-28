@@ -115,6 +115,8 @@ document.addEventListener('scroll', onScroll)
 /* ================== BUILD NAVIGATION BAR ================== */
 /* ========================================================== */
 
+const fragment  = document.createDocumentFragment();
+
 // for every title we append an in nav
 for (let i = 0; i < titles.length; i++) {
 
@@ -134,8 +136,10 @@ for (let i = 0; i < titles.length; i++) {
   item.appendChild(menuLink);
 
   // append to navbar
-  navEl.appendChild(item);
+  fragment.appendChild(item);
 
   // add to intersection API observer
   observer.observe(sections[i]);
 }
+
+navList.appendChild(fragment);
