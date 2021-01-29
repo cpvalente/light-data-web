@@ -29,6 +29,7 @@ const activeCSS = 'is__active';
 const navLinkSelect = 'menu__link';
 const navPrefix = 'nav-'
 const showScroll = 'showScrollbar'
+const intersectThresh = 0.75;
 
 // get all sections
 const sections = document.querySelectorAll(sectionSelect);
@@ -47,7 +48,7 @@ let navEl = document.getElementById(navSelect);
 
 // intersection API
 let options = {
-  threshold: 0.8, // 0.7?
+  threshold: intersectThresh,
 }
 
 let observer = new IntersectionObserver(observerHandler, options);
