@@ -23,12 +23,12 @@
 */
 const titleSelect = 'h2.landing__title';
 const sectionSelect = 'section';
-const navSelect = 'navbar__list';
+const navListSelect = 'navbar__list';
 const navBarSelect = '.navbar__menu';
 const activeCSS = 'is__active';
 const navLinkSelect = 'menu__link';
 const navPrefix = 'nav-'
-const showScroll = 'showScrollbar'
+const fadeDownCSS = 'opacityDown'
 const intersectThresh = 0.75;
 
 // get all sections
@@ -37,14 +37,8 @@ const sections = document.querySelectorAll(sectionSelect);
 // get all titles under #landing__container
 const titles = document.querySelectorAll(titleSelect);
 
-// get nav element
-let navEl = document.getElementById(navSelect);
-
-/**
- * End Global Variables
- * Start Helper Functions
- *
-*/
+// get nav list element
+const navList = document.getElementById(navListSelect);
 
 // intersection API
 let options = {
@@ -53,40 +47,40 @@ let options = {
 
 let observer = new IntersectionObserver(observerHandler, options);
 
+
 /**
- * End Helper Functions
- * Begin Main Functions
+ * End Global Variables
+ * Start Helper Functions
  *
 */
 
-function clearScroll() {
+let clearScroll = () => {
   // add opacity to navbar
-  document.querySelector(navBarSelect).classList.add('opacityDown');
+  document.querySelector(navBarSelect).classList.add(fadeDownCSS);
 }
 
-function onScroll() {
+let onScroll = () => {
   // remove opacity override from navbar
-  document.querySelector(navBarSelect).classList.remove('opacityDown');
+  document.querySelector(navBarSelect).classList.remove(fadeDownCSS);
   // call clearScroll with timeout
   setTimeout(clearScroll, 10000);
 }
 
-function clearActiveNav() {
+let clearActiveNav = () => {
   // clears active class from all navigation elements
   const navEls = document.getElementsByClassName(navLinkSelect);
-  for (let i = 0; i < navEls.length; i++) {
-    navEls[i].classList.remove(activeCSS);
-  }
+  for (e of navEls) {
+    e.classList.remove(activeCSS);
+  };
 }
 
 function observerHandler(entries) {
   // add active CSS to intersecting object
 
-
   // clear active class
   clearActiveNav();
 
-  entries.forEach(entry => {
+  for (entry of entries) {
 
     if (entry.isIntersecting) {
       // add active CSS to section
@@ -100,7 +94,45 @@ function observerHandler(entries) {
       entry.target.classList.remove(activeCSS);
     }
 
-  });
+  };
+}
+
+/**
+ * End Helper Functions
+ * Begin Main Functions
+ *
+*/
+
+let buildNav = () => {
+  // create utility framgment
+  const fragment = document.createDocumentFragment();
+
+  // for every title we append an in nav
+  for (let i = 0; i < titles.length; i++) {
+
+    // create a list element
+    let item = document.createElement('li');
+
+    // create a menu link
+    let menuLink = document.createElement('a');
+
+    // inject title as text and sectionID as ref
+    menuLink.innerText = titles[i].innerText;
+    menuLink.href = `#${sections[i].id}`;
+    menuLink.classList.add(navLinkSelect);
+    menuLink.setAttribute('id', `${navPrefix}${sections[i].id}`);
+
+    // append link to list item
+    item.appendChild(menuLink);
+
+    // append to navbar
+    fragment.appendChild(item);
+
+    // add to intersection API observer
+    observer.observe(sections[i]);
+  }
+
+  navList.appendChild(fragment);
 }
 
 /**
@@ -112,35 +144,5 @@ function observerHandler(entries) {
 // add listener to scroller events
 document.addEventListener('scroll', onScroll)
 
-/* ========================================================== */
-/* ================== BUILD NAVIGATION BAR ================== */
-/* ========================================================== */
-
-const fragment  = document.createDocumentFragment();
-
-// for every title we append an in nav
-for (let i = 0; i < titles.length; i++) {
-
-  // create a list element
-  let item = document.createElement('li');
-
-  // create a menu link
-  let menuLink = document.createElement('a');
-
-  // inject title as text and sectionID as ref
-  menuLink.innerText = titles[i].innerText;
-  menuLink.href = `#${sections[i].id}`;
-  menuLink.classList.add(navLinkSelect);
-  menuLink.setAttribute('id', `${navPrefix}${sections[i].id}`);
-
-  // append link to list item
-  item.appendChild(menuLink);
-
-  // append to navbar
-  fragment.appendChild(item);
-
-  // add to intersection API observer
-  observer.observe(sections[i]);
-}
-
-navList.appendChild(fragment);
+// build navigation
+buildNav();
