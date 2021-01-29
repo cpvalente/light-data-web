@@ -55,26 +55,40 @@ let observer = new IntersectionObserver(observerHandler, options);
  *
 */
 
-let clearScroll = () => {
-  // add opacity to navbar
+
+/**
+* @description Sets opacity of nav element down
+* @param none
+* @returns none
+*/
+let setNavbarOpacityDown = () => {
   document.querySelector(navBarSelect).classList.add(fadeDownCSS);
 }
 
+/**
+* @description When user scrolls, fade up navbar and add navigate to top
+* @param none
+* @returns none
+*/
 let onScroll = () => {
-  // remove opacity override from navbar
   document.querySelector(navBarSelect).classList.remove(fadeDownCSS);
 
   if (scrollY < 100) {
-    activateScrollToTop(false);
+    activateScrollToTopEl(false);
   } else {
-    activateScrollToTop(true);
+    activateScrollToTopEl(true);
   }
 
   // call clearScroll with timeout
-  setTimeout(clearScroll, 10000);
+  setTimeout(setNavbarOpacityDown, 10000);
 }
 
-let activateScrollToTop = (toggle) => {
+/**
+* @description Toggles navigate to top element
+* @param {boolean} toggle
+* @returns none
+*/
+let activateScrollToTopEl = (toggle) => {
   const el = document.getElementById(NavToTop);
   toggle
     ?
@@ -83,24 +97,36 @@ let activateScrollToTop = (toggle) => {
     el.classList.remove(activeCSS);
 }
 
-let navigateToTop = () => {
+/**
+* @description Sets window to given Y position
+* @param {number} posY
+* @returns none
+*/
+let navigateTo = (posY) => {
   window.scrollTo({
-    top: 0,
-    left: 0,
+    top: posY,
     behavior: 'smooth'
   });
 }
 
+/**
+* @description Clears active class from all navigation elements
+* @param none
+* @returns none
+*/
 let clearActiveNav = () => {
-  // clears active class from all navigation elements
   const navEls = document.getElementsByClassName(navLinkSelect);
   for (e of navEls) {
     e.classList.remove(activeCSS);
   };
 }
 
+/**
+* @description Observer handler function, adds active class to intersecting object
+* @param {HTMLAllCollection} entries
+* @returns none
+*/
 function observerHandler(entries) {
-  // add active CSS to intersecting object
 
   // clear active class
   clearActiveNav();
@@ -128,6 +154,11 @@ function observerHandler(entries) {
  *
 */
 
+/**
+* @description Build navigation bar
+* @param none
+* @returns none
+*/
 let buildNav = () => {
   // create utility framgment
   const fragment = document.createDocumentFragment();
