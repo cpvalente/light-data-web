@@ -379,6 +379,6 @@ section.is__active {
 
 .top__.is__active {
   opacity: 1;
-  transform: translateY(-20px);
+  transform: translateY(-30px);
   transition: all 0.3s linear;
 }
