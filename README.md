@@ -1,4 +1,4 @@
-sitename
---------
-Sitename is an exercise on DOM manipulation using js
+light-data
+-----------
+Landing website to introduce the web-app light data
 
