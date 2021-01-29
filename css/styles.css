@@ -134,9 +134,30 @@ section {
 
 /* Navigation Styles*/
 
-.navbar__menu {
+
+.top__link {
+  text-decoration: underline;
+  color: #aac7d3;
+}
+
+.navbar__menu, .top__ {
   background: rgba(15, 32, 39, 0.3);
   font-size: 0.5em;
+}
+
+.top__ {
+  position:fixed;
+  bottom: 2em;
+  right: 2em;
+  padding: 0.2em 1em 0.2em 1em;
+  border-radius: 0.1em;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+
+}
+
+.top__link:hover {
+  color: #fff;
 }
 
 .navbar__menu ul {
@@ -166,8 +187,12 @@ section {
 }
 
 @media only screen and (min-width: 720px) {
-  .navbar__menu {
+  .navbar__menu, .top__ {
     font-size: 0.7em;
+  }
+
+  .top__{
+    font-size: 0.9em;
   }
 
   .navbar__menu ul {
@@ -350,4 +375,9 @@ section.is__active {
 .opacityDown {
   opacity: 0.3;
   transition: ease 3s;
+}
+
+.top__.is__active {
+  opacity: 1;
+  transition: all 0.3s linear;
 }

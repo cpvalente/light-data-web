@@ -30,6 +30,7 @@ const navLinkSelect = 'menu__link';
 const navPrefix = 'nav-'
 const fadeDownCSS = 'opacityDown'
 const intersectThresh = 0.75;
+const NavToTop = 'navToTop'
 
 // get all sections
 const sections = document.querySelectorAll(sectionSelect);
@@ -62,8 +63,32 @@ let clearScroll = () => {
 let onScroll = () => {
   // remove opacity override from navbar
   document.querySelector(navBarSelect).classList.remove(fadeDownCSS);
+
+  if (scrollY < 100) {
+    activateScrollToTop(false);
+  } else {
+    activateScrollToTop(true);
+  }
+
   // call clearScroll with timeout
   setTimeout(clearScroll, 10000);
+}
+
+let activateScrollToTop = (toggle) => {
+  const el = document.getElementById(NavToTop);
+  toggle
+    ?
+    el.classList.add(activeCSS)
+    :
+    el.classList.remove(activeCSS);
+}
+
+let navigateToTop = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
 }
 
 let clearActiveNav = () => {
@@ -111,10 +136,10 @@ let buildNav = () => {
   for (let i = 0; i < titles.length; i++) {
 
     // create a list element
-    let item = document.createElement('li');
+    const item = document.createElement('li');
 
     // create a menu link
-    let menuLink = document.createElement('a');
+    const menuLink = document.createElement('a');
 
     // inject title as text and sectionID as ref
     menuLink.innerText = titles[i].innerText;
