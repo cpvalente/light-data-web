@@ -108,6 +108,39 @@ let navigateTo = (posY) => {
     behavior: 'smooth'
   });
 }
+/**
+ * @description Sets window to given element position
+ * @param {HTMLElement} element
+ * @returns none
+ */
+let scrollTo = (element) => {
+  element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+    inline: 'nearest',
+  });
+};
+
+/**
+ * @description Event handler for clicks, calls scrollTo on target
+ * @param {Event} event
+ * @returns none
+ */
+let clickEventHandler = (event) => {
+  // prevent degault action
+  event.preventDefault();
+
+  // filter undefined
+  if (event.target?.id) {
+    for (let i = 0; i < sections.length; i++) {
+      const s = sections[i];
+      if (s.dataset.nav === event.target.id) {
+        scrollTo(s);
+        break;
+      }
+    }
+  }
+};
 
 /**
 * @description Clears active class from all navigation elements
@@ -134,18 +167,17 @@ function observerHandler(entries) {
   for (entry of entries) {
 
     if (entry.isIntersecting) {
+      let t = entry.target;
       // add active CSS to section
-      entry.target.classList.add(activeCSS);
+      t.classList.add(activeCSS);
 
       // add active CSS to corresponding nav title
-      let navItem = document.getElementById(`${navPrefix}${entry.target.id}`);
+      let navItem = document.getElementById(t.dataset.nav);
       navItem.classList.add(activeCSS);
-
     } else {
       entry.target.classList.remove(activeCSS);
     }
-
-  };
+  }
 }
 
 /**
@@ -174,9 +206,11 @@ let buildNav = () => {
 
     // inject title as text and sectionID as ref
     menuLink.innerText = titles[i].innerText;
-    menuLink.href = `#${sections[i].id}`;
+    menuLink.href = '#';
     menuLink.classList.add(navLinkSelect);
-    menuLink.setAttribute('id', `${navPrefix}${sections[i].id}`);
+
+    // match data attribute to section
+    menuLink.id = sections[i].dataset.nav;
 
     // append link to list item
     item.appendChild(menuLink);
@@ -199,6 +233,8 @@ let buildNav = () => {
 
 // add listener to scroller events
 document.addEventListener('scroll', onScroll)
+// add event listener to clicks on navbar
+navList.addEventListener('click', clickEventHandler);
 
 // build navigation
 buildNav();
